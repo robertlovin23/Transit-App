@@ -4,8 +4,8 @@ React application that makes an Axios request to fetch data from the TransitLand
 
 ## Scripts
 
-###`npm start`
+`npm start`
 
-###`npm clone`
+`npm clone`
 
-###`npm build`
+`npm build`
