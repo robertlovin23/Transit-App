@@ -32,7 +32,8 @@ class App extends React.Component{
            this.setState({
                stops: response.data.stops,
                lat: this.state.lat,
-               lng: this.state.lng
+               lng: this.state.lng,
+               selectedStop: response.data.stops[0]
            })
            console.log(this.state.stops,this.state.lat,this.state.lng)
        }
@@ -42,7 +43,7 @@ class App extends React.Component{
             this.setState({
                 lat: position.coords.latitude,
                 lng: position.coords.longitude,
-                defaultZoom: 13
+                defaultZoom: 16
             })
             console.log(this.state.lat,this.state.lng)
             this.onUserSubmit(lat,lng)
@@ -56,7 +57,7 @@ class App extends React.Component{
             this.setState({
                 lat: lat,
                 lng: lng,
-                defaultZoom: 15
+                defaultZoom: 16
             })
             this.onUserSubmit(lat,lng)
           },
@@ -75,11 +76,10 @@ class App extends React.Component{
     }
     //TODO: click list item that corresponds to the map
     selectListItem = (stop) => {
-        console.log(stop)
         this.setState({
-            selectedStop: stop
+            selectedStop: stop,
+            defaultZoom: 18
         })
-        console.log(this.state.selectedStop)
     }
     render(){
         return(
@@ -92,7 +92,7 @@ class App extends React.Component{
                      <Mapbox stops={this.state.stops} 
                         lat={this.state.lat} 
                         lng={this.state.lng}
-                        selectListItem={this.selectListItem}
+                        stop={this.state.selectedStop}
                         defaultZoom={this.state.defaultZoom}/>
                     </div>
                 </div>
