@@ -4,6 +4,8 @@ import SearchBar from './SearchBar'
 import Mapbox from './Mapbox'
 import Geocode from 'react-geocode'
 import StationList from './StationList'
+import Header from './Header'
+import Footer from './Footer'
 
 //Google Geocode API key, need to secure
 Geocode.setApiKey("AIzaSyCr5MR1j9onOL4o82um7Gj1rY7R9W0apWg");
@@ -16,10 +18,10 @@ class App extends React.Component{
             selectedStop: null,
             lat: 39.828175,
             lng: -98.579500,
-            defaultZoom: 5      
+            defaultZoom: 5,
+            active: false      
         }
     }
-
     onUserSubmit = async() => {
         //Sends a request using axios and async/await to return a promise, then sets the state
         const response = await stops.get('/stops', {      
@@ -33,7 +35,8 @@ class App extends React.Component{
                stops: response.data.stops,
                lat: this.state.lat,
                lng: this.state.lng,
-               selectedStop: response.data.stops[0]
+               selectedStop: response.data.stops[0],
+               active: response.data.stops[0]
            })
            console.log(this.state.stops,this.state.lat,this.state.lng)
        }
@@ -78,15 +81,18 @@ class App extends React.Component{
     selectListItem = (stop) => {
         this.setState({
             selectedStop: stop,
-            defaultZoom: 18
+            defaultZoom: 18,
+            active: !false
         })
     }
     render(){
         return(
+            <div>
+                <Header/>
                 <div className="ui grid">
                     <div className="four wide column">
                         <SearchBar onTermSubmit={this.componentDidMount}/>
-                        <StationList stops={this.state.stops} selectListItem={this.selectListItem}/>
+                        <StationList stops={this.state.stops} selectListItem={this.selectListItem} active={this.state.selectedStop}/>
                      </div>
                      <div className="twelve wide column">
                      <Mapbox stops={this.state.stops} 
@@ -96,6 +102,8 @@ class App extends React.Component{
                         defaultZoom={this.state.defaultZoom}/>
                     </div>
                 </div>
+                <Footer/>
+            </div>
         )
     }
 }

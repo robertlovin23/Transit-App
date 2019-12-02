@@ -4,8 +4,11 @@ const Header = () => {
     return(
         <div className="ui inverted menu">
             <div className="header item" style={{color:"yellow"}}>
-                <i className="big bus icon"/>
                 <div >TransitGo</div>
+            </div>
+            <div className="right menu" >
+               <div className="item" style={{color:"yellow"}}>Robert Lovin</div>
+               <div className="item" style={{color:"yellow"}}> Copyright: 2019</div>
             </div>
         </div>
     )
