@@ -16,9 +16,9 @@
 
 @media only screen and (max-width: 765px) {
     .mapHeight{
-        height: 65vh;
+        height: 60vh;
     } 
     .listHeight{
-        height: 65vh;
+        height: 60vh;
     }
 }
