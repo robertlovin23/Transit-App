@@ -8,6 +8,7 @@ const ListCard = ({stop,active,selectListItem}) => {
         )
     } else {
     return(
+        //matches active item with active stop to check which click handler is being handled
          <div className={stop === active ? 'ui card raised yellow' : 'ui card '}
                 style={{width: "100%", marginBottom: "15px", marginTop: "10px"}} 
                 onClick={() => selectListItem(stop)}
