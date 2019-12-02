@@ -5,3 +5,13 @@
 .font{
     font-family: 'Courier New', Courier, monospace;
 }
+.mapHeight{
+    height: 100vh;
+    width: 100%
+}
+
+@media only screen and (max-width: 765px) {
+    .mapHeight{
+        height: 70vh;
+    } 
+}

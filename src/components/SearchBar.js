@@ -19,7 +19,7 @@ class SearchBar extends React.Component{
     }
     render(){
         return(
-            <div className="ui segment" style={{alignContent: "center", marginLeft: "20px", display: "block"}}>
+            <div className="ui segment" style={{alignContent: "center", display: "block"}}>
                 <form className="ui form" onSubmit={this.onTermSubmit}>
                     <label>Search for Stops</label>
                     <div className="ui field">

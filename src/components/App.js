@@ -46,7 +46,7 @@ class App extends React.Component{
             this.setState({
                 lat: position.coords.latitude,
                 lng: position.coords.longitude,
-                defaultZoom: 18
+                defaultZoom: 17
             })
             console.log(this.state.lat,this.state.lng)
             this.onUserSubmit(lat,lng)
@@ -60,7 +60,7 @@ class App extends React.Component{
             this.setState({
                 lat: lat,
                 lng: lng,
-                defaultZoom: 18
+                defaultZoom: 17
             })
             this.onUserSubmit(lat,lng)
           },
@@ -81,7 +81,7 @@ class App extends React.Component{
     selectListItem = (stop) => {
         this.setState({
             selectedStop: stop,
-            defaultZoom: 18,
+            defaultZoom: 17,
             active: !false
         })
     }
@@ -89,12 +89,12 @@ class App extends React.Component{
         return(
             <div>
                 <Header/>
-                <div className="ui grid">
-                    <div className="four wide column">
+                <div className="ui mobile reversed stackable two column grid">
+                    <div className="sixteen wide mobile six wide tablet four wide computer column">
                         <SearchBar onTermSubmit={this.componentDidMount}/>
                         <StationList stops={this.state.stops} selectListItem={this.selectListItem} active={this.state.selectedStop}/>
                      </div>
-                     <div className="twelve wide column">
+                     <div className="sixteen wide mobile ten wide tablet twelve wide computer column">
                      <Mapbox stops={this.state.stops} 
                         lat={this.state.lat} 
                         lng={this.state.lng}

@@ -18,7 +18,7 @@ const StationList = ({stops,selectListItem,active}) => {
         }
     })
     return(
-        <div  style={{height: '88.5vh', overflow: 'scroll'}}>{response}</div>
+        <div  className="listHeight" style={{height: '88.5vh', overflow: 'scroll'}}>{response}</div>
     )
 }
 

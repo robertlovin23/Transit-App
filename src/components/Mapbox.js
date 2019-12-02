@@ -1,5 +1,6 @@
 import React from 'react'
 import GoogleMapReact from 'google-map-react'
+import './CardStyle.css'
 
 const Markers = () => {
     return(
@@ -12,12 +13,12 @@ const Mapbox = ({stops,stop,lat,lng,defaultZoom}) => {
     console.log(stop)
         if(!stop){
             return(
-            <div style={{height: "100vh", width: "100%"}}>
+            <div className="mapHeight">
                 <GoogleMapReact 
-                bootstrapURLKeys={{key: "AIzaSyCr5MR1j9onOL4o82um7Gj1rY7R9W0apWg"}}
-                defaultCenter={{lat: 39.0997, lng: -94.5786}}
-                center={{lat: lat, lng: lng}}
-                zoom={defaultZoom}/>
+                    bootstrapURLKeys={{key: "AIzaSyCr5MR1j9onOL4o82um7Gj1rY7R9W0apWg"}}
+                    defaultCenter={{lat: 39.0997, lng: -94.5786}}
+                    center={{lat: lat, lng: lng}}
+                    zoom={defaultZoom}/>
             </div>
             )
         }  else {
@@ -25,7 +26,7 @@ const Mapbox = ({stops,stop,lat,lng,defaultZoom}) => {
             const  singleLng  = stop.geometry.coordinates[0];
             console.log(singleLat,singleLng)
             return(
-                <div style={{height: "100vh", width: "100%"}}>
+                <div className="mapHeight">
                     <GoogleMapReact 
                         bootstrapURLKeys={{key: "AIzaSyCr5MR1j9onOL4o82um7Gj1rY7R9W0apWg"}}
                         defaultCenter={{lat: 39.0997, lng: -94.5786}}
@@ -45,7 +46,7 @@ const Mapbox = ({stops,stop,lat,lng,defaultZoom}) => {
                         }
                     </GoogleMapReact>
                 </div>
-                )
+            )
         }
 
     }
