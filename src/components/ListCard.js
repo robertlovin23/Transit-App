@@ -14,7 +14,8 @@ const ListCard = ({stop,active,selectListItem}) => {
                 onClick={() => selectListItem(stop)}
             >
             <div className="content">
-                <div className="header">{stop.name}</div>
+            <i className={stop.wheelchair_boarding != null ? "ui wheelchair icon" : ""} style={{float:"right"}}/>
+                <div className="header"><h4>{stop.name}</h4></div>
                 <div className="meta">
                     Type: {stop.served_by_vehicle_types[0].charAt(0).toUpperCase() + stop.served_by_vehicle_types[0].slice(1)}
                 </div>
