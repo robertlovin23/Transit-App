@@ -7,9 +7,8 @@ const ListCard = ({stop,active,selectListItem}) => {
             <div>Loading...</div>
         )
     } else {
-    console.log(active)
     return(
-         <div className={stop === active ? 'ui card raised card-style' : 'ui card '}
+         <div className={stop === active ? 'ui card raised yellow' : 'ui card '}
                 style={{width: "100%", marginBottom: "15px", marginTop: "10px"}} 
                 onClick={() => selectListItem(stop)}
             >

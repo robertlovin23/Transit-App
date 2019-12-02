@@ -46,7 +46,7 @@ class App extends React.Component{
             this.setState({
                 lat: position.coords.latitude,
                 lng: position.coords.longitude,
-                defaultZoom: 16
+                defaultZoom: 18
             })
             console.log(this.state.lat,this.state.lng)
             this.onUserSubmit(lat,lng)
@@ -60,7 +60,7 @@ class App extends React.Component{
             this.setState({
                 lat: lat,
                 lng: lng,
-                defaultZoom: 16
+                defaultZoom: 18
             })
             this.onUserSubmit(lat,lng)
           },
