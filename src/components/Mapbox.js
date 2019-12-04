@@ -4,7 +4,6 @@ import './CardStyle.css'
 import stops from '../api/stops'
 
 const Markers = ({stopMarker, activeItem,selectListItem}) => {
-console.log(stopMarker, activeItem)
 if(activeItem.onestop_id !== stopMarker.onestop_id){
     if(stopMarker.served_by_vehicle_types[0] === "bus"){
         return(
@@ -18,7 +17,13 @@ if(activeItem.onestop_id !== stopMarker.onestop_id){
                 <i className="big train icon"/>
             </div>
         )
-    } else if(stopMarker.served_by_vehicle_types[0] === "tram" || stopMarker.served_by_vehicle_types[0] === "metro"){
+    } else if(stopMarker.served_by_vehicle_types[0] === "tram"){
+        return(
+            <div onClick={() => {selectListItem(stopMarker)}} >
+                <i className="big subway icon"/>
+            </div>
+        )
+    } else if(stopMarker.served_by_vehicle_types[0] === "metro"){
         return(
             <div onClick={() => {selectListItem(stopMarker)}} >
                 <i className="big subway icon"/>
@@ -44,7 +49,13 @@ if(activeItem.onestop_id !== stopMarker.onestop_id){
                 <i className="big train icon yellow markerStyle"/>
             </div>
         )
-    } else if(stopMarker.served_by_vehicle_types[0] === "tram" || stopMarker.served_by_vehicle_types[0] === "metro"){
+    } else if(stopMarker.served_by_vehicle_types[0] === "tram"){
+        return(
+            <div>
+                <i className="big subway icon yellow markerStyle"/>
+            </div>
+        )
+    } else if(stopMarker.served_by_vehicle_types[0] === "metro"){
         return(
             <div>
                 <i className="big subway icon yellow markerStyle"/>

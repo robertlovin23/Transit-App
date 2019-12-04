@@ -19,8 +19,9 @@ class App extends React.Component{
             lat: 39.828175,
             lng: -98.579500,
             defaultZoom: 5,
-            active: false      
+            active: false,
         }
+        this.listItem = React.createRef();
     }
     onUserSubmit = async() => {
         //Sends a request using axios and async/await to return a promise, then sets the state
@@ -82,6 +83,7 @@ class App extends React.Component{
             defaultZoom: 18,
             active: !false
         });
+        console.log(this.state.selectedStop)
     }
     render(){
         return(
@@ -90,15 +92,15 @@ class App extends React.Component{
                 <div className="ui mobile reversed stackable two column grid">
                     <div className="sixteen wide mobile six wide tablet four wide computer column">
                         <SearchBar onTermSubmit={this.componentDidMount}/>
-                        <StationList stops={this.state.stops} selectListItem={this.selectListItem} active={this.state.selectedStop}/>
+                        <StationList ref={this.listItem} stops={this.state.stops} selectListItem={this.selectListItem} active={this.state.selectedStop}/>
                      </div>
                      <div className="sixteen wide mobile ten wide tablet twelve wide computer column">
-                     <Mapbox stops={this.state.stops} 
-                        lat={this.state.lat} 
-                        lng={this.state.lng}
-                        active={this.state.selectedStop}
-                        selectListItem={this.selectListItem}
-                        defaultZoom={this.state.defaultZoom}
+                        <Mapbox stops={this.state.stops} 
+                            lat={this.state.lat} 
+                            lng={this.state.lng}
+                            active={this.state.selectedStop}
+                            selectListItem={this.selectListItem}
+                            defaultZoom={this.state.defaultZoom}
                      />
                     </div>
                 </div>
