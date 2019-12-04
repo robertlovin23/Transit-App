@@ -3,54 +3,77 @@ import GoogleMapReact from 'google-map-react'
 import './CardStyle.css'
 import stops from '../api/stops'
 
-const Markers = ({stopMarker}) => {
+const Markers = ({stopMarker, activeItem,selectListItem}) => {
+console.log(stopMarker, activeItem)
+if(activeItem.onestop_id !== stopMarker.onestop_id){
     if(stopMarker.served_by_vehicle_types[0] === "bus"){
         return(
-            <div>
+            <div onClick={() => {selectListItem(stopMarker)}}>
                 <i className="big bus icon"/>
             </div>
         )
     } else if(stopMarker.served_by_vehicle_types[0] === "rail"){
         return(
-            <div>
+            <div onClick={() => {selectListItem(stopMarker)}}>
                 <i className="big train icon"/>
             </div>
         )
     } else if(stopMarker.served_by_vehicle_types[0] === "tram" || stopMarker.served_by_vehicle_types[0] === "metro"){
         return(
-            <div>
+            <div onClick={() => {selectListItem(stopMarker)}} >
                 <i className="big subway icon"/>
             </div>
         )
     } else if(stopMarker.served_by_vehicle_types[0] === "ferry"){
         return(
-            <div>
+            <div onClick={() => {selectListItem(stopMarker)}}>
                 <i className="big ship icon"/>
             </div>
         )
-    } else {
+    }
+} else if(activeItem.onestop_id === stopMarker.onestop_id) {
+    if(stopMarker.served_by_vehicle_types[0] === "bus"){
         return(
             <div>
-                <i className="big bus icon"/>
+                <i className="big bus icon yellow markerStyle"/>
             </div>
         )
-    }
+    } else if(stopMarker.served_by_vehicle_types[0] === "rail"){
+        return(
+            <div>
+                <i className="big train icon yellow markerStyle"/>
+            </div>
+        )
+    } else if(stopMarker.served_by_vehicle_types[0] === "tram" || stopMarker.served_by_vehicle_types[0] === "metro"){
+        return(
+            <div>
+                <i className="big subway icon yellow markerStyle"/>
+            </div>
+        )
+    } else if(stopMarker.served_by_vehicle_types[0] === "ferry"){
+        return(
+            <div>
+                <i className="big ship icon yellow markerStyle"/>
+            </div>
+        )
+    } 
+}
 }
 class Mapbox extends React.Component{
     state ={
         routePattern: []
     }
-    componentDidMount = async () => {
-        const response = await stops.get('/route_stop_patterns')
-        this.setState({
-            routePattern: response.data
-        })
-        console.log(this.state.routePattern)
-    }
+    // componentDidMount = async () => {
+    //     const response = await stops.get('/route_stop_patterns')
+    //     this.setState({
+    //         routePattern: response.data
+    //     })
+    //     console.log(this.state.routePattern)
+    // }
     render(){
-    const { stops,stop,lat,lng,defaultZoom } = this.props
-    console.log(stop)
-        if(!stop){
+    const { stops,lat,lng,defaultZoom,active,selectListItem } = this.props
+    console.log(active)
+        if(!active){
             return(
             <div className="mapHeight">
                 <GoogleMapReact 
@@ -61,9 +84,10 @@ class Mapbox extends React.Component{
             </div>
             )
         }  else {
-            const  singleLat  = stop.geometry.coordinates[1];
-            const  singleLng  = stop.geometry.coordinates[0];
-            console.log(singleLat,singleLng)
+
+            const  singleLat  = active.geometry.coordinates[1];
+            const  singleLng  = active.geometry.coordinates[0];
+
             return(
                 <div className="mapHeight">
                     <GoogleMapReact 
@@ -77,6 +101,8 @@ class Mapbox extends React.Component{
                                 return(
                                     <Markers key={index} text="Marker"
                                             stopMarker={stop}
+                                            activeItem={active}
+                                            selectListItem={selectListItem}
                                             lat={stop.geometry.coordinates[1]}
                                             lng={stop.geometry.coordinates[0]}
         

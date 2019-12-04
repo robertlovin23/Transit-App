@@ -1,4 +1,5 @@
 import React from 'react'
+import Schedule from'./Schedule'
 import './CardStyle.css'
 
 const ListCard = ({stop,active,selectListItem}) => {
@@ -22,6 +23,7 @@ const ListCard = ({stop,active,selectListItem}) => {
             </div>
             <div className="content">
                 <h4 className="ui sub header">{stop.operators_serving_stop[0].operator_name}</h4>
+                {/* <Schedule stop={stop} active={active}/> */}
             </div>
         </div>
         )

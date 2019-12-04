@@ -3,7 +3,6 @@ import ListCard from './ListCard'
 import './CardStyle.css'
 
 const StationList = ({stops,selectListItem,active}) => {
-    console.log(active)
     const response = stops.map((stop,index) => {
         if(!stops && !active){
             return(

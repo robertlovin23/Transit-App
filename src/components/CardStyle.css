@@ -13,7 +13,13 @@
     height: 88.5vh;
     width: 100%;
 }
-
+.markerStyle{
+    border-radius: 30%;
+    height:35px!important;
+    width:30px!important;
+    background-color: black;
+    padding-top:6px!important;
+}
 @media only screen and (max-width: 765px) {
     .mapHeight{
         height: 60vh;

@@ -38,7 +38,6 @@ class App extends React.Component{
                selectedStop: response.data.stops[0],
                active: response.data.stops[0]
            })
-           console.log(this.state.stops,this.state.lat,this.state.lng)
        }
     userGeolocation = (lat,lng) => {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -48,7 +47,6 @@ class App extends React.Component{
                 lng: position.coords.longitude,
                 defaultZoom: 17
             })
-            console.log(this.state.lat,this.state.lng)
             this.onUserSubmit(lat,lng)
        })      
     }
@@ -81,9 +79,9 @@ class App extends React.Component{
     selectListItem = (stop) => {
         this.setState({
             selectedStop: stop,
-            defaultZoom: 17,
+            defaultZoom: 18,
             active: !false
-        })
+        });
     }
     render(){
         return(
@@ -98,8 +96,10 @@ class App extends React.Component{
                      <Mapbox stops={this.state.stops} 
                         lat={this.state.lat} 
                         lng={this.state.lng}
-                        stop={this.state.selectedStop}
-                        defaultZoom={this.state.defaultZoom}/>
+                        active={this.state.selectedStop}
+                        selectListItem={this.selectListItem}
+                        defaultZoom={this.state.defaultZoom}
+                     />
                     </div>
                 </div>
                 <Footer/>
