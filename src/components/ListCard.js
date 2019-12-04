@@ -24,6 +24,18 @@ const ListCard = ({stop,active,selectListItem,listItem}) => {
             </div>
             <div className="content">
                 <h4 className="ui sub header">{stop.operators_serving_stop[0].operator_name}</h4>
+                <br/>
+                <p>Routes: 
+                <br/>
+                {   
+                    stop.routes_serving_stop.map((route,index) => {
+                        return(
+                            <div key={index} style={{display:"inline-block", marginBottom: '5px', marginRight:'5px',borderRadius: "10px"}} className="routeStyle">{route.route_name}</div>
+                        )
+                     }
+                    )
+                }
+                </p>
                 {/* <Schedule stop={stop} active={active}/> */}
             </div>
         </div>

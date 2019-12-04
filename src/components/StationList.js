@@ -21,7 +21,7 @@ class StationList extends React.Component{
         }
     })
     return(
-        <div  className="listHeight" style={{height: '88.5vh', overflowY: 'scroll'}}>{response}</div>
+        <div  className="listHeight" style={{height: '86vh', overflowY: 'scroll'}}>{response}</div>
     )
     }
 }

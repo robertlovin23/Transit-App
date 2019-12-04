@@ -13,6 +13,13 @@
     height: 88.5vh;
     width: 100%;
 }
+.routeStyle{
+    width: 100px;
+    height:100%;
+    text-align:center;
+    color: yellow;
+    background-color:black;
+}
 .markerStyle{
     border-radius: 30%;
     height:35px!important;
@@ -22,9 +29,9 @@
 }
 @media only screen and (max-width: 765px) {
     .mapHeight{
-        height: 60vh;
+        height: 55vh;
     } 
     .listHeight{
-        height: 60vh;
+        height: 55vh;
     }
 }
