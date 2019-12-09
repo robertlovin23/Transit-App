@@ -4,6 +4,7 @@ import SearchBar from './SearchBar'
 import Mapbox from './Mapbox'
 import Geocode from 'react-geocode'
 import StationList from './StationList'
+import haversine from 'haversine'
 import Header from './Header'
 import Footer from './Footer'
 
@@ -20,6 +21,7 @@ class App extends React.Component{
             lng: -98.579500,
             defaultZoom: 5,
             active: false,
+            distance: 0
         }
         this.listItem = React.createRef();
     }
@@ -29,7 +31,7 @@ class App extends React.Component{
           params: {
                   lat: this.state.lat,
                   lon: this.state.lng,
-                  r: 1000
+                  r: 1600
               }
            });
            this.setState({
@@ -47,7 +49,7 @@ class App extends React.Component{
                 lat: position.coords.latitude,
                 lng: position.coords.longitude,
                 defaultZoom: 17
-            })
+            });
             this.onUserSubmit(lat,lng)
        })      
     }
@@ -68,6 +70,7 @@ class App extends React.Component{
           }
         )    
        }
+
     // Conditional between User Geolocation and Geocoding an Address
     componentDidMount = (term,lat,lng) => {
         if(!term){
@@ -92,7 +95,7 @@ class App extends React.Component{
                 <div className="ui mobile reversed stackable two column grid">
                     <div className="sixteen wide mobile six wide tablet four wide computer column">
                         <SearchBar onTermSubmit={this.componentDidMount}/>
-                        <StationList ref={this.listItem} stops={this.state.stops} selectListItem={this.selectListItem} active={this.state.selectedStop}/>
+                        <StationList stops={this.state.stops} selectListItem={this.selectListItem} active={this.state.selectedStop} lat={this.state.lat} lng={this.state.lng}/>
                      </div>
                      <div className="sixteen wide mobile ten wide tablet twelve wide computer column">
                         <Mapbox stops={this.state.stops} 

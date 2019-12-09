@@ -70,20 +70,19 @@ if(activeItem.onestop_id !== stopMarker.onestop_id){
     } 
 }
 }
+
+const LocationMarker = ({text}) => {
+    return(
+        <div className="marker-style">
+            <i className="big male icon red"/>
+        </div>
+    )
+}
 class Mapbox extends React.Component{
-    state ={
-        routePattern: []
-    }
-    // componentDidMount = async () => {
-    //     const response = await stops.get('/route_stop_patterns')
-    //     this.setState({
-    //         routePattern: response.data
-    //     })
-    //     console.log(this.state.routePattern)
-    // }
     render(){
+
     const { stops,lat,lng,defaultZoom,active,selectListItem } = this.props
-    console.log(active)
+
         if(!active){
             return(
             <div className="mapHeight">
@@ -91,7 +90,13 @@ class Mapbox extends React.Component{
                     bootstrapURLKeys={{key: "AIzaSyCr5MR1j9onOL4o82um7Gj1rY7R9W0apWg"}}
                     defaultCenter={{lat: 39.0997, lng: -94.5786}}
                     center={{lat: lat, lng: lng}}
-                    zoom={defaultZoom}/>
+                    zoom={defaultZoom}
+                    >
+                        <LocationMarker text="My Location"
+                                        lat={lat}
+                                        lng={lng}
+                        />
+                </GoogleMapReact>
             </div>
             )
         }  else {
@@ -121,6 +126,10 @@ class Mapbox extends React.Component{
                                 )
                             })
                         }
+                        <LocationMarker text="My Location"
+                                        lat={lat}
+                                        lng={lng}
+                        />
                     </GoogleMapReact>
                 </div>
             )

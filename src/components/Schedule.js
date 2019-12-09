@@ -6,23 +6,49 @@ class Schedule extends React.Component{
     constructor(){
         super()
         this.state={
-            schedules: []
+            schedules: [],
+            modal: false,
+            activeModal: 0,
+            selectedSchedule: null
         }
     }
-    componentDidMount = async () => {
-        const id = this.props.stop.routes_serving_stop[0].route_onestop_id
-        const response = await stops.get(`/schedule_stop_pairs?route_onestop_id=${id}`,{
+    submitSchedule = async () => {
+        // console.log(this.props)
+        const id = this.props.stop.onestop_id
+        // console.log(id)
+        const response = await stops.get(`/schedule_stop_pairs?origin_onestop_id=${id}`,{
             params:{
-
+                
             }
         })
         this.setState({
-            schedules: response.data.schedule_stop_pairs[0]
+            schedules: response.data.schedule_stop_pairs,
+            selectedSchedule: response.data.schedule_stop_pairs
         })
-        console.log(this.state.schedules)
+        // console.log(this.state.schedules)
+    }
+    componentDidMount = () => {
+        this.submitSchedule();
+    }
+    // componentDidUpdate = (schedule) => {
+    //     this.selectSchedule(schedule)
+    // }
+    selectScheduleState = (sched) => {
+        this.setState({
+            selectSchedule: sched,
+            modal: true,
+            activeModal: 1
+        })
+        // console.log(this.state.selectedSchedule)
+    }
+    handleClose = () => {
+        this.setState({
+            modal: false,
+            activeModal: 0
+        })
     }
     render(){
-        const { stop } = this.props
+        const { stop,active,selectListItem } = this.props
         if(!stop){
             return(
                 <div>Loading...</div>
@@ -30,8 +56,8 @@ class Schedule extends React.Component{
         } else {
             return(
                 <div>
-                    <div className="ui primary button">Schedule</div>
-                    <Modal schedules={this.state.schedules} stop={this.props.active}/>
+                    <div className="ui black button" style={{marginTop: '5px',color: 'yellow'}} onClick={() => this.selectScheduleState(this.state.selectSchedule)}>Departure Times</div>
+                    <Modal schedules={this.state.schedules} stop={stop} selectListItem={selectListItem} active={active} modal={this.state.modal} handleClose={this.handleClose} activeModal={this.state.activeModal}/>
                 </div>
             )
         }
