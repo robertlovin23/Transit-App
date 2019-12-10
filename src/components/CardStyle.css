@@ -1,3 +1,4 @@
+
 .card-style{
     border: 1px black!important;
     border-style:solid;
@@ -41,14 +42,18 @@
     margin-top: 250px!important;
 }
 .dim{
-    height:848px!important;
+    /* height:848px!important; */
+    position: fixed!important;
+    top: 0!important;
+    left: 0!important;
+
 }
 @media only screen and (max-width: 765px) {
     .mapHeight{
         height: 55vh;
     } 
     .dim{
-        height:1250x!important;
+        height:1200px!important;
     }
     /* .activeModal{
         margin-top: 200px!important;
