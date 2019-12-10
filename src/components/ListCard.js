@@ -67,7 +67,8 @@ class ListCard extends React.Component{
                         )
                      })
                 }
-                <p>Departure Times</p>
+                <br/>
+                <p>Departure Times:</p>
                 <Schedule stop={stop} active={active} selectListItem={selectListItem} term={term} stops={stops}/>
             </div>
             <div className="content">
