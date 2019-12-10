@@ -13,17 +13,12 @@ class Schedule extends React.Component{
         }
     }
     submitSchedule = async () => {
-        // console.log(this.props)
         const id = this.props.stop.onestop_id
         // console.log(id)
-        const response = await stops.get(`/schedule_stop_pairs?origin_onestop_id=${id}`,{
-            params:{
-                
-            }
-        })
+        const response = await stops.get(`/schedule_stop_pairs?origin_onestop_id=${id}`)
         this.setState({
             schedules: response.data.schedule_stop_pairs,
-            selectedSchedule: response.data.schedule_stop_pairs
+            selectedSchedule: response.data.schedule_stop_pairs[0]
         })
         // console.log(this.state.schedules)
     }
@@ -33,9 +28,18 @@ class Schedule extends React.Component{
     // componentDidUpdate = (schedule) => {
     //     this.selectSchedule(schedule)
     // }
-    selectScheduleState = (sched) => {
+    componentDidUpdate = () => {
+        if(!this.state.selectedSchedule){
+            return(
+                <div>Loading...</div>
+            )
+        } else if(this.state.selectedSchedule.origin_onestop_id !== this.props.stops[0].onestop_id){
+            return this.submitSchedule()
+        }
+    }
+    selectScheduleState = (schedule) => {
         this.setState({
-            selectSchedule: sched,
+            selectedSchedule: schedule,
             modal: true,
             activeModal: 1
         })
@@ -48,7 +52,7 @@ class Schedule extends React.Component{
         })
     }
     render(){
-        const { stop,active,selectListItem } = this.props
+        const { stop,active } = this.props
         if(!stop){
             return(
                 <div>Loading...</div>
@@ -56,8 +60,13 @@ class Schedule extends React.Component{
         } else {
             return(
                 <div>
-                    <div className="ui black button" style={{marginTop: '5px',color: 'yellow'}} onClick={() => this.selectScheduleState(this.state.selectSchedule)}>Departure Times</div>
-                    <Modal schedules={this.state.schedules} stop={stop} selectListItem={selectListItem} active={active} modal={this.state.modal} handleClose={this.handleClose} activeModal={this.state.activeModal}/>
+                    <div className="ui black button" style={{marginTop: '5px',color: 'yellow'}} onClick={this.selectScheduleState}>Departure Times</div>
+                    <Modal schedules={this.state.schedules} 
+                        active={active} 
+                        stop={stop} 
+                        modal={this.state.modal} 
+                        handleClose={this.handleClose} 
+                        activeModal={this.state.activeModal}/>
                 </div>
             )
         }

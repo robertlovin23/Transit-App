@@ -2,7 +2,8 @@ import React from 'react'
 
 class SearchBar extends React.Component{
     state={
-        term: ""
+        term: "",
+        distance: 0
     }
 
     onTermChange = (event) => {
@@ -11,15 +12,21 @@ class SearchBar extends React.Component{
         })
     }
 
+    onDistanceChange = (event) => {
+        this.setState({
+            distance: event.target.value
+        })
+    }
+
     onTermSubmit = (event) => {
         event.preventDefault();
         this.props.onTermSubmit(
-            this.state.term
+            this.state.term,
+            this.state.distance
         )
     }
     render(){
         return(
-            <div className="ui segment" style={{alignContent: "center", display: "block"}}>
                 <form className="ui form" onSubmit={this.onTermSubmit}>
                     <label>Search for Stops</label>
                     <div className="ui field">
@@ -30,7 +37,6 @@ class SearchBar extends React.Component{
                         />
                     </div>
                 </form>
-            </div>
         )
     }
 }

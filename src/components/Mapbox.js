@@ -92,9 +92,10 @@ class Mapbox extends React.Component{
                     center={{lat: lat, lng: lng}}
                     zoom={defaultZoom}
                     >
-                        <LocationMarker text="My Location"
-                                        lat={lat}
-                                        lng={lng}
+                        <LocationMarker 
+                            text="My Location"
+                            lat={lat}
+                            lng={lng}
                         />
                 </GoogleMapReact>
             </div>
@@ -126,10 +127,11 @@ class Mapbox extends React.Component{
                                 )
                             })
                         }
-                        <LocationMarker text="My Location"
+                                    <LocationMarker 
+                                        text="My Location"
                                         lat={lat}
                                         lng={lng}
-                        />
+                                   />
                     </GoogleMapReact>
                 </div>
             )

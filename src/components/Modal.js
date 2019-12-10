@@ -25,7 +25,7 @@ const Modal = ({schedules,active,handleClose,modal,activeModal,stop}) => {
                             schedules.map((schedule,index) => {
                                 // console.log(active.onestop_id === schedule.origin_onestop_id)
                                 // console.log(active.onestop_id, schedule.origin_onestop_id)
-                                var time = schedule.origin_arrival_time;
+                                var time = schedule.origin_departure_time;
                                 time = time.split(':');
                                 var hours = Number(time[0]);
                                 var minutes = Number(time[1]);
@@ -40,7 +40,8 @@ const Modal = ({schedules,active,handleClose,modal,activeModal,stop}) => {
 
                                 timeValue += (minutes < 10) ? ":0" + minutes : ':' + minutes;
                                 timeValue += (hours >= 12) ? " PM" : ' AM'
-                                if(stop.onestop_id === schedule.origin_onestop_id){
+
+                                if(active.onestop_id === schedule.origin_onestop_id){
                                     return(                  
                                         <div className="item" key={index}>
                                             <b>{schedule.trip_headsign}</b> - {timeValue}

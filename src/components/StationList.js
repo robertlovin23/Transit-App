@@ -8,7 +8,7 @@ class StationList extends React.Component{
         this.scrollRef = React.createRef();
     }
     render(){
-        const {stops,selectListItem,active,listItem,term,stop,lat,lng} = this.props
+        const {stops,selectListItem,active,listItem,term,stop,lat,lng,haversineFormula} = this.props
         const response = stops.map((stop,index) => {
         if(!stop && !active){
             return(
@@ -19,7 +19,7 @@ class StationList extends React.Component{
         } else {
             return(
                 <div className="ui container divided items" style={{width: "308px"}} ref={this.scrollRef}>
-                    <ListCard stop={stop} key={index} ref={listItem} selectListItem={selectListItem} active={active} term={term} lat={lat} lng={lng}/>
+                    <ListCard stop={stop} key={index} ref={listItem} selectListItem={selectListItem} active={active} term={term} lat={lat} lng={lng} haversineFormula={haversineFormula} stops={stops}/>
                 </div>
             )
         }
