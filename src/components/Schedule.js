@@ -60,7 +60,7 @@ class Schedule extends React.Component{
         } else {
             return(
                 <div>
-                    <div className="ui black button" style={{marginTop: '5px',color: 'yellow'}} onClick={this.selectScheduleState}>Departure Times</div>
+                    <div className="ui black button" style={{color: 'yellow'}} onClick={this.selectScheduleState}>Departure Times</div>
                     <Modal schedules={this.state.schedules} 
                         active={active} 
                         stop={stop} 
