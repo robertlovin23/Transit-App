@@ -1,6 +1,7 @@
 import React from 'react'
 import stops from '../api/stops'
 import Modal from './Modal'
+import _ from 'lodash'
 
 class Schedule extends React.Component{
     constructor(){
@@ -12,8 +13,10 @@ class Schedule extends React.Component{
             selectedSchedule: null
         }
     }
+    //C
     submitSchedule = async () => {
         const id = this.props.stop.onestop_id
+
         // console.log(id)
         const response = await stops.get(`/schedule_stop_pairs?origin_onestop_id=${id}`)
         this.setState({
@@ -25,18 +28,21 @@ class Schedule extends React.Component{
     componentDidMount = () => {
         this.submitSchedule();
     }
-    // componentDidUpdate = (schedule) => {
-    //     this.selectSchedule(schedule)
-    // }
-    componentDidUpdate = () => {
-        if(!this.state.selectedSchedule){
-            return(
-                <div>Loading...</div>
-            )
-        } else if(this.state.selectedSchedule.origin_onestop_id !== this.props.stops[0].onestop_id){
-            return this.submitSchedule()
+    componentDidUpdate = (prevProps,prevState) => {
+        if(this.props.stops[0].onestop_id !== prevProps.stops[0].onestop_id){
+            this.submitSchedule(this.props.stops[0].onestop_id);
         }
     }
+    // shouldComponentUpdate = (prevState,prevProps) => {
+    //     console.log(prevProps,prevState)
+    //     if(!prevProps.selectedSchedule){
+    //         return(
+    //             <div>Loading...</div>
+    //         )
+    //     } else if(prevProps.selectedSchedule.origin_onestop_id){
+    //         return this.submitSchedule();
+    //     }
+    // }
     selectScheduleState = (schedule) => {
         this.setState({
             selectedSchedule: schedule,
@@ -55,7 +61,11 @@ class Schedule extends React.Component{
         const { stop,active } = this.props
         if(!stop){
             return(
-                <div>Loading...</div>
+            <div className="ui container">
+                <div className="ui active inverted dimmer">
+                    <div className="ui text loader">Loading...</div>
+                </div>
+          </div>
             )
         } else {
             return(

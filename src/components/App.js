@@ -25,6 +25,7 @@ class App extends React.Component{
         }
         this.listItem = React.createRef();
     }
+    
     handleValue = (event) => {
         this.setState({
             transport: event.target.value
@@ -47,6 +48,7 @@ class App extends React.Component{
                active: response.data.stops[0]
            })
        }
+    //Find's users current location 
     userGeolocation = (lat,lng) => {
         navigator.geolocation.getCurrentPosition((position) => {
             //Set user location as lat and lng
@@ -84,12 +86,15 @@ class App extends React.Component{
             this.geocodeAddress(term);
         }
     }
+    //Degrees to radians conversion
     deg2rad = (deg) => {
         return deg * (Math.PI/180)
     }
+    //KM to Miles calculation
     getMiles(i) {
         return i / 1.6
     }
+    //Haverisne Calculation that allows you to measure the distance between a map marker and the currently marked location
     haversineFormula = (lat,lng,stop) => {
 
         var R = 6371;

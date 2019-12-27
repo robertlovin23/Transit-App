@@ -3,6 +3,8 @@ import GoogleMapReact from 'google-map-react'
 import './CardStyle.css'
 import stops from '../api/stops'
 
+
+//Sets the layout of each marker, which is determined by the veichle type as well as if the marker is active.
 const Markers = ({stopMarker, activeItem,selectListItem}) => {
 if(activeItem.onestop_id !== stopMarker.onestop_id){
     if(stopMarker.served_by_vehicle_types[0] === "bus"){
@@ -70,7 +72,7 @@ if(activeItem.onestop_id !== stopMarker.onestop_id){
     } 
 }
 }
-
+//Marker for current location
 const LocationMarker = ({text}) => {
     return(
         <div className="marker-style">
@@ -78,6 +80,7 @@ const LocationMarker = ({text}) => {
         </div>
     )
 }
+//Class that 
 class Mapbox extends React.Component{
     render(){
 
