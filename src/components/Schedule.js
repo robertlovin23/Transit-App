@@ -33,9 +33,9 @@ class Schedule extends React.Component{
             this.submitSchedule(this.props.stops[0].onestop_id);
         }
     }
-    componentWillUnmount = () => {
-        console.log()
-    }
+    // componentWillUnmount = () => {
+    //     console.log()
+    // }
     selectScheduleState = (schedule) => {
         this.setState({
             selectedSchedule: schedule,

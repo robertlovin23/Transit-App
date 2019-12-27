@@ -37,7 +37,7 @@ class ListCard extends React.Component{
     // }
     render(){
         const {stop,active,selectListItem,listItem,term,haversineFormula,lat,lng,stops} = this.props
-        if(!stop && !stop.operators_serving_stop[0].operator_name) {
+        if(!stop && !stop.operators_serving_stop[0].operator_name && !stop.served_by_vehicle_types[0]) {
             return(
                 <div>Loading...</div>
             )
@@ -53,7 +53,8 @@ class ListCard extends React.Component{
             <i className={stop.wheelchair_boarding != null ? "ui wheelchair icon" : ""} style={{float:"right"}}/>
                 <div className="header"><h4>{stop.name}</h4></div>
                 <div className="meta">
-                    Type: {stop.served_by_vehicle_types[0].charAt(0).toUpperCase() + stop.served_by_vehicle_types[0].slice(1)}
+                {/* Type: {stop.served_by_vehicle_types[0].charAt(0).toUpperCase() + stop.served_by_vehicle_types[0].slice(1)} */}
+                Type: {stop.served_by_vehicle_types[0].charAt(0).toUpperCase() + stop.served_by_vehicle_types[0].slice(1)}
                 </div>
             </div>
             <div className="content">
