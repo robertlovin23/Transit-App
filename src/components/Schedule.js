@@ -28,21 +28,14 @@ class Schedule extends React.Component{
     componentDidMount = () => {
         this.submitSchedule();
     }
-    componentDidUpdate = (prevProps,prevState) => {
+    componentDidUpdate = (prevProps) => {
         if(this.props.stops[0].onestop_id !== prevProps.stops[0].onestop_id){
             this.submitSchedule(this.props.stops[0].onestop_id);
         }
     }
-    // shouldComponentUpdate = (prevState,prevProps) => {
-    //     console.log(prevProps,prevState)
-    //     if(!prevProps.selectedSchedule){
-    //         return(
-    //             <div>Loading...</div>
-    //         )
-    //     } else if(prevProps.selectedSchedule.origin_onestop_id){
-    //         return this.submitSchedule();
-    //     }
-    // }
+    componentWillUnmount = () => {
+        console.log()
+    }
     selectScheduleState = (schedule) => {
         this.setState({
             selectedSchedule: schedule,
