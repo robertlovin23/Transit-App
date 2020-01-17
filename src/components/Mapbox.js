@@ -4,7 +4,7 @@ import './CardStyle.css'
 import stops from '../api/stops'
 
 
-//Sets the layout of each marker, which is determined by the veichle type as well as if the marker is active.
+//Sets the layout of each marker, which is determined by the veichle type as well as if the marker is active. Could rewrite as a ternary statement
 const Markers = ({stopMarker, activeItem,selectListItem}) => {
 if(activeItem.onestop_id !== stopMarker.onestop_id){
     if(stopMarker.served_by_vehicle_types[0] === "bus"){
@@ -80,7 +80,7 @@ const LocationMarker = ({text}) => {
         </div>
     )
 }
-//Class that 
+
 class Mapbox extends React.Component{
     render(){
 
@@ -94,7 +94,7 @@ class Mapbox extends React.Component{
                     defaultCenter={{lat: 39.0997, lng: -94.5786}}
                     center={{lat: lat, lng: lng}}
                     zoom={defaultZoom}
-                    >
+                >
                         <LocationMarker 
                             text="My Location"
                             lat={lat}

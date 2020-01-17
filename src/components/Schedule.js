@@ -25,17 +25,18 @@ class Schedule extends React.Component{
         })
         // console.log(this.state.schedules)
     }
+    //Mounts schedule component so that data is initialized
     componentDidMount = () => {
         this.submitSchedule();
     }
+    //Compares previous props to the current props in order to determine if there has been a change in the data
     componentDidUpdate = (prevProps) => {
         if(this.props.stops[0].onestop_id !== prevProps.stops[0].onestop_id){
             this.submitSchedule(this.props.stops[0].onestop_id);
         }
     }
-    // componentWillUnmount = () => {
-    //     console.log()
-    // }
+
+    //This sets the active schedule modal by setting the modal state to true and the index to 1
     selectScheduleState = (schedule) => {
         this.setState({
             selectedSchedule: schedule,
@@ -44,6 +45,7 @@ class Schedule extends React.Component{
         })
         // console.log(this.state.selectedSchedule)
     }
+    //Closes the Modal
     handleClose = () => {
         this.setState({
             modal: false,

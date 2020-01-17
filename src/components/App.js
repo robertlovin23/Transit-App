@@ -21,25 +21,21 @@ class App extends React.Component{
             lng: -98.579500,
             defaultZoom: 5,
             active: false,
-            distance: []
+            distance: [],
+            // radius: 800
         }
-        this.listItem = React.createRef();
+
     }
-    
-    handleValue = (event) => {
-        this.setState({
-            transport: event.target.value
-        })
-    }
-    onUserSubmit = async() => {
+
+    onUserSubmit = async(radius) => {
         //Sends a request using axios and async/await to return a promise, then sets the state
-        const response = await stops.get('/stops', {      
-          params: {
-                  lat: this.state.lat,
-                  lon: this.state.lng,
-                  r: 800
-              }
-           });
+            const response = await stops.get('/stops', {      
+            params: {
+                    lat: this.state.lat,
+                    lon: this.state.lng,
+                    r: radius
+                }
+            });
            this.setState({
                stops: response.data.stops,
                lat: this.state.lat,
@@ -47,18 +43,35 @@ class App extends React.Component{
                selectedStop: response.data.stops[0],
                active: response.data.stops[0]
            })
+           console.log(radius)
        }
     //Find's users current location 
     userGeolocation = (lat,lng) => {
-        navigator.geolocation.getCurrentPosition((position) => {
+        const options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
+        navigator.geolocation.getCurrentPosition((position,options) => {
             //Set user location as lat and lng
             this.setState({
                 lat: position.coords.latitude,
                 lng: position.coords.longitude,
-                defaultZoom: 17
+                defaultZoom: 17,
             });
             this.onUserSubmit(lat,lng)
        })      
+    }
+    handleRadiusChange = (event) => {
+        this.setState({
+            radius: event.target.value
+        })
+    }
+    radiusSubmit = (event) => {
+        event.preventDefault();
+        this.props.radiusSubmit(
+            this.state.radius
+        )
     }
     //Geocodes the Address that the user inputs
     geocodeAddress = (term) => {
@@ -73,7 +86,7 @@ class App extends React.Component{
             this.onUserSubmit(lat,lng)
           },
           error => {
-            alert(error);
+            console.log(error);
           }
         )    
        }
@@ -134,25 +147,15 @@ class App extends React.Component{
                     <div className="sixteen wide mobile six wide tablet four wide computer column">
                         <div className="ui segment">
                             <SearchBar onTermSubmit={this.componentDidMount} style={{alignContent: "center", display: "block"}}/>
-                            {/* <div className="filter-section" style={{marginTop:"10px"}}>
-                                <p>Filter By:</p>
-                                <div class="ui checkbox">
-                                    <input type="checkbox" name="example"/>
-                                    <label>Distance</label>
-                                </div>
-                                <div class="ui selection dropdown">
-                                    <input type="hidden" name="gender"/>
-                                        <i class="dropdown icon"></i>
-                                        <div class="default text">Transportation Type</div>
-                                            <div class="menu">
-                                               <div class="item" data-value="1">Bus</div>
-                                                <div class="item" data-value="0">Ferry</div>
-                                                <div class="item" data-value="0">Metro</div>
-                                                <div class="item" data-value="0">Tram</div>
-                                                <div class="item" data-value="0">Rail</div>
-                                            </div>
-                                        </div>
-                            </div> */}
+                            {/* <div className=" ui field filter-section" style={{marginTop:"10px"}}>
+                                <p>Distance From Location:</p>
+                                    <select className="ui search dropdown" value={this.state.radius} onChange={this.handleRadiusChange} onSubmit={this.radiusSubmit}>
+                                        <option value={400}>0.25 Miles</option>
+                                        <option value={800}>0.50 Miles</option>
+                                        <option value={1200}>0.75 Miles</option>
+                                        <option value={1600}>1 Mile</option>
+                                    </select>
+                                </div> */}
                         </div>
                         <StationList stops={this.state.stops} 
                             selectListItem={this.selectListItem} 

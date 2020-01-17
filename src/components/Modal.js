@@ -22,9 +22,10 @@ const Modal = ({schedules,active,handleClose,modal,activeModal,stop}) => {
                         <div className="content">
                             <div className="ui relaxed divided list">
                             {
+                            //Function that maps the schedule listings to the modal
                             schedules.map((schedule,index) => {
-                                // console.log(active.onestop_id === schedule.origin_onestop_id)
-                                // console.log(active.onestop_id, schedule.origin_onestop_id)
+
+                                //Equation that changes time from military time to US standard time
                                 var time = schedule.origin_departure_time;
                                 time = time.split(':');
                                 var hours = Number(time[0]);
@@ -41,6 +42,7 @@ const Modal = ({schedules,active,handleClose,modal,activeModal,stop}) => {
                                 timeValue += (minutes < 10) ? ":0" + minutes : ':' + minutes;
                                 timeValue += (hours >= 12) ? " PM" : ' AM'
 
+                                //Checks if the active modals index is equal to the ID of the selected stop.
                                 if(active.onestop_id === schedule.origin_onestop_id){
                                     return(                  
                                         <div className="item" key={index}>
