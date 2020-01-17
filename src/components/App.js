@@ -36,6 +36,7 @@ class App extends React.Component{
                     r: 800
                 }
             });
+        //Sets the state of the latitude, longitude, stops, and which stop is actively selected by the user
            this.setState({
                stops: response.data.stops,
                lat: this.state.lat,
@@ -62,17 +63,18 @@ class App extends React.Component{
             this.onUserSubmit(lat,lng)
        })      
     }
-    handleRadiusChange = (event) => {
-        this.setState({
-            radius: event.target.value
-        })
-    }
-    radiusSubmit = (event) => {
-        event.preventDefault();
-        this.props.radiusSubmit(
-            this.state.radius
-        )
-    }
+    // handleRadiusChange = (event) => {
+    //     this.setState({
+    //         radius: event.target.value
+    //     })
+    // }
+    // radiusSubmit = (event) => {
+    //     event.preventDefault();
+    //     this.props.radiusSubmit(
+    //         this.state.radius
+    //     )
+    // }
+    
     //Geocodes the Address that the user inputs
     geocodeAddress = (term) => {
         Geocode.fromAddress(term).then(
