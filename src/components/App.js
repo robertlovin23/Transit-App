@@ -33,7 +33,7 @@ class App extends React.Component{
             params: {
                     lat: this.state.lat,
                     lon: this.state.lng,
-                    r: radius
+                    r: 800
                 }
             });
            this.setState({
