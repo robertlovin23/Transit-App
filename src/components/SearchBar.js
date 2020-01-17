@@ -5,7 +5,7 @@ class SearchBar extends React.Component{
         super()
         this.state={
             term: "",
-            radius: 800
+            // radius: 800
         }
     }
     //The click handler used to change the search term 

@@ -2,6 +2,7 @@ import React from 'react'
 import GoogleMapReact from 'google-map-react'
 import './CardStyle.css'
 import stops from '../api/stops'
+import keys from '../keys'
 
 
 //Sets the layout of each marker, which is determined by the veichle type as well as if the marker is active. Could rewrite as a ternary statement
