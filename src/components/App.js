@@ -148,7 +148,7 @@ class App extends React.Component{
                 <div className="ui mobile reversed stackable two column grid">
                     <div className="sixteen wide mobile six wide tablet four wide computer column">
                         <div className="ui segment">
-                            <SearchBar onTermSubmit={this.componentDidMount} style={{alignContent: "center", display: "block"}}/>
+                        <SearchBar onTermSubmit={this.componentDidMount} style={{alignContent: "center", display: "block"}}/>
                             {/* <div className=" ui field filter-section" style={{marginTop:"10px"}}>
                                 <p>Distance From Location:</p>
                                     <select className="ui search dropdown" value={this.state.radius} onChange={this.handleRadiusChange} onSubmit={this.radiusSubmit}>
